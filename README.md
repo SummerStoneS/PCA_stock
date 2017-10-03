@@ -8,13 +8,13 @@ The empirical data involves March 2008 - March 2017 China's A-share stocks. Afte
 
 # Introduction of each .py
 ## get_stock.py
-  - get_industry()
+  - `get_industry()`
     returns all stocks code with their industry labels
-  - get_list(industry='')
+  - `get_list(industry='')`
     returns list of stock codes that match the industry you give
-  - get_stock(start_d, end_d, stock_list)
+  - `get_stock(start_d, end_d, stock_list)`
     returns T*N stock price matrix given the start date, end date and stock codes you give
-  - get_data(trading_start, industry='', window=60)
+  - `get_data(trading_start, industry='', window=60)`
     returns estimation_data and trading data, estimation_data is for selecting stocks that are most stable and fast mean-reverted. trading data is for trading the stocks that previously stand out.
     
 ## get_factors.py
@@ -22,16 +22,16 @@ This function implements principal component analysis to the basket of stocks in
 params p is the number of component you want to have in the analysis. note that p is not the larger the better. when p becomes too large, the noise becomes siginificant, too. so follow the scree  plot should be a good choice.
 
 the process of PCA should involve key steps as shown bellowed:
-(1) change the stock price to return
-(2) calculate correlation matrix(C) of stock return
-(3) calculate eigen value and eigen vectors of C 
-(4) Sort eigen values, and select top p eigen vectors that have the p largest eigen values
-(5) adjust eigen values by stock volatility
-(6) calculate p factors
+1. change the stock price to return
+2. calculate correlation matrix(C) of stock return
+3. calculate eigen value and eigen vectors of C 
+4. Sort eigen values, and select top p eigen vectors that have the p largest eigen values
+5. adjust eigen values by stock volatility
+6. calculate p factors
 This function returns p factors, each factor is a linear combination of the initial N stocks, the coefficients are derived from (5)  
 
 ## ou_estimation.py
 I use O-U stochastic process to fit the residual of each stock, which means each stock return subtracts the common p factors
-  - get_residual(data_matrix, factors)
+  - `get_residual(data_matrix, factors)`
     this function runs a multi-linear regression on the stock returns and the p factors, and it returns residuals and loading factors.
 Add new line
