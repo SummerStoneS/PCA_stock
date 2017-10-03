@@ -40,10 +40,15 @@ I use O-U stochastic process to fit the residual of each stock, which means each
 ## portfolio_selection.py
 `portfolio_selection(stock_estimation, factors, window=60, repeat=10, interval=5, top_n=75)`
     :param stock_estimation: estimation data
+    
     :param window: estimation window 30,60,90,120
+    
     :param repeat: estimation times
+    
     :param interval: moving window interval
+    
     :param top_n: number of stocks to be selected into portfolio
+    
     :return: indices of stocks in the portfolio, type = list
    this fuction returns the 75 stocks codes list that have the fastest mean-conversion rate, and should be traded in the next level.
 
