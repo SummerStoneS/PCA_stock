@@ -37,7 +37,8 @@ I use O-U stochastic process to fit the residual of each stock, which means each
   - `ou_estimation(cum_residual)`
     this function returns the parameters of ou-estimation on each stock. parameter k measures the mean-reversion speed. R-square is an indication of robustness. Note that the discrete version of ou-estimation, which is a continious time series model, is an ARMA(1,0) model.
     
-## portfolio_selection(stock_estimation, factors, window=60, repeat=10, interval=5, top_n=75)
+## portfolio_selection.py
+`portfolio_selection(stock_estimation, factors, window=60, repeat=10, interval=5, top_n=75)`
     :param stock_estimation: estimation data
     :param window: estimation window 30,60,90,120
     :param repeat: estimation times
@@ -45,3 +46,26 @@ I use O-U stochastic process to fit the residual of each stock, which means each
     :param top_n: number of stocks to be selected into portfolio
     :return: indices of stocks in the portfolio, type = list
    this fuction returns the 75 stocks codes list that have the fastest mean-conversion rate, and should be traded in the next level.
+
+## get_position.py
+`get_position(portfolio_index, stock_trade, factors, window=60, I=1)`
+This function returns the positions of each stocks in the whole trading periods.
+This should involve two steps:
+1. calculate the trading signal of each stock
+2. allocate funds on each stock that has a trading signal, whether long or short
+
+## trading_func.py
+This .py supports the process in the above get_position.py
+`trading_signal(cum_residuals, last_sign, i)`
+This fuction actually calculates the trading signal of each stock. when the sum_of_residuals of T-days before deviates too much, it generates a signal for long or short that tock.
+`optimize_allocation(sign, loadings, n, unchanged, I_adj = 1)`
+This function realize asset allocation of each stock with `scipy.optimize.minimize`
+
+## earnings.py
+This function returns the total p&l and sharpe ratio of this trading strategy.
+
+## visualize.py
+This function visulizes the total pnl, max_drawdown, scree plot and a regression of strategy return on hs300
+
+## strategy_effect.py & params_effect.py
+These two .py study the effect of params in the overall strategy
